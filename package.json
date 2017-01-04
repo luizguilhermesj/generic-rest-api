@@ -1,6 +1,6 @@
 {
   "name": "generic-rest-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This module generates a basic rest API based on your models",
   "main": "index.js",
   "scripts": {
