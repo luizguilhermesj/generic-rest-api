@@ -12,24 +12,22 @@ module.exports = function(app, modelsPath, options) {
 
     options = Object.assign(defaults, options);
 
-    var modelsNames = [];
     fs.readdirSync(modelsPath).forEach(function (file) {
         if(file.substr(-3) == '.js') {
-            modelsNames.push(file.replace(".js",""));
+            var modelName = file.replace(".js","");
+            var route = options.prefix ? '/'+options.prefix+'/'+modelName : '/' + modelName;
+            app.use(route, function(req, res, next) {
+                req.genericRestApi = {
+                  model: models[modelName]
+                };
+                return routes(req, res, next);
+            });
         }
     });
 
-    var route = options.prefix ? '/'+options.prefix+'/:model' : '/:model';
-    app.use(route, function(req, res, next) {
-        if (modelsNames.indexOf(req.params.model) > -1) {
-            req.genericRestApi = {
-              model: models[req.params.model]
-            };
-            return routes(req, res, next);
-        }
-
+    return function(req, res, next) {
         return next();
-    });
+    };
 
 };
 
