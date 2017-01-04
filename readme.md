@@ -23,7 +23,7 @@ var genericRestApi = require('generic-rest-api');
 app.use(genericRestApi(app, __dirname+'/models'));
 ```
 
-Let's assume you have just one model named 'user'. This code will add your application the following routes:
+Let's assume you have just one model named `user`. This code will add your application the following routes:
 
 GET /user  
 GET /user/:id  
