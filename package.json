@@ -1,0 +1,22 @@
+{
+  "name": "generic-rest-api",
+  "version": "1.0.0",
+  "description": "This module generates a basic rest API based on your models",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luiz Guilherme <luizguilhermesj00@gmail.com> (http://github.com/luizguilhermesj)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizguilhermesj/generic-rest-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luizguilhermesj/generic-rest-api/issues"
+  },
+  "homepage": "https://github.com/luizguilhermesj/generic-rest-api#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
