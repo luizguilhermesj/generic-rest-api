@@ -25,11 +25,11 @@ app.use(genericRestApi(app, __dirname+'/models'));
 
 Let's assume you have just one model named 'user'. This code will add your application the following routes:
 
-GET /user
-GET /user/:id
-POST /user
-PUT /user/:id
-DELETE /user/:id
+GET /user  
+GET /user/:id  
+POST /user  
+PUT /user/:id  
+DELETE /user/:id  
 
 
 #### Obs
