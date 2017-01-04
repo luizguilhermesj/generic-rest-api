@@ -1,8 +1,17 @@
 {
   "name": "generic-rest-api",
-  "version": "1.0.2",
-  "description": "This module generates a basic rest API based on your models",
+  "version": "1.0.3",
+  "description": "Express JS generic rest api based on your sequelize models",
   "main": "index.js",
+  "keywords": [
+    "rest",
+    "restful",
+    "api",
+    "express",
+    "sequelize",
+    "generic",
+    "generator"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

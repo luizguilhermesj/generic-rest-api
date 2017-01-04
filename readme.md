@@ -1,5 +1,5 @@
 # generic-rest-api
-Node JS generic rest api based on your models
+Express JS generic rest api based on your sequelize models
 
 
 #### Requirements
