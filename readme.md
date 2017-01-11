@@ -27,6 +27,7 @@ Let's assume you have just one model named `user`. This code will add your appli
 
 GET /user  
 GET /user/:id  
+GET /user/:id/:relation  
 POST /user  
 PUT /user/:id  
 DELETE /user/:id  
