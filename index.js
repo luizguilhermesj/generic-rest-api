@@ -18,12 +18,15 @@ module.exports = function(app, modelsPath, options) {
             var route = options.prefix ? '/'+options.prefix+'/'+modelName : '/' + modelName;
             app.use(route, function(req, res, next) {
                 req.genericRestApi = {
-                  model: models[modelName]
+                    modelName: modelName,
+                    models: models,
+                    model: models[modelName]
                 };
                 return routes(req, res, next);
             });
         }
     });
+
 
     return function(req, res, next) {
         return next();
