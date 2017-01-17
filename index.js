@@ -7,16 +7,19 @@ module.exports = function(app, modelsPath, options) {
 
     var models  = require(modelsPath);
     var defaults = {
-        prefix: null
+        prefix: null,
+        middlewares: []
     };
 
     options = Object.assign(defaults, options);
 
+    var preRoutes = require('./express-pre-routes')(options.middlewares);
+
     fs.readdirSync(modelsPath).forEach(function (file) {
         if(file.substr(-3) == '.js') {
             var modelName = file.replace(".js","");
-            var route = options.prefix ? '/'+options.prefix+'/'+modelName : '/' + modelName;
-            app.use(route, function(req, res, next) {
+            var route = options.prefix ? '/'+options.prefix.replace(/^\/+|\/+$/g, '')+'/'+modelName : '/' + modelName;
+            app.use(route, preRoutes, function(req, res, next) {
                 req.genericRestApi = {
                     modelName: modelName,
                     models: models,

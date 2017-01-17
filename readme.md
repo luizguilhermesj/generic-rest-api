@@ -1,5 +1,5 @@
 # generic-rest-api
-Express JS generic rest api based on your sequelize models
+Express JS generic REST API based on your sequelize models
 
 **Note** this lib is in development. I'm trying to publish only stable versions, but you may find some kind of issue.  
 Please make this world more beautiful and **report** this [**issue**](https://github.com/luizguilhermesj/generic-rest-api/issues) so I can correct it.  
@@ -29,7 +29,7 @@ var genericRestApi = require('generic-rest-api');
 app.use(genericRestApi(app, __dirname+'/models'));
 ```
 
-Let's assume you have just one model named `user`. This code will add your application the following routes:
+Let's assume you have just one model named `user`. The first example will add your application the following routes:
 
 GET /user  
 GET /user/:id  
@@ -37,6 +37,31 @@ GET /user/:id/:relation
 POST /user  
 PUT /user/:id  
 DELETE /user/:id  
+
+If you want to add a prefix to your API you can declare it in the options:
+
+```javascript
+var options = {
+    prefix: "/api/v2"
+};
+app.use(genericRestApi(app, __dirname+'/models', options));
+```
+
+This way your API will be:  
+
+GET /api/v2/user  
+[...]  
+
+You can also add some middlewares to all generic rest routes:
+
+```javascript
+var options = {
+    middlewares: [
+        authentication
+    ]
+};
+app.use(genericRestApi(app, __dirname+'/models', options));
+```
 
 #### Authentication
 
