@@ -1,10 +1,6 @@
 # generic-rest-api
 Express JS generic REST API based on your sequelize models
 
-**Note** this lib is in development. I'm trying to publish only stable versions, but you may find some kind of issue.  
-Please make this world more beautiful and **report** this [**issue**](https://github.com/luizguilhermesj/generic-rest-api/issues) so I can correct it.  
-And, of course, if you want you can always make a [**pull request**](https://github.com/luizguilhermesj/generic-rest-api/pulls).  
-
 The goal is to make something that we can use to build APIs really fast, instead of using a full framework like [sailsjs](http://sailsjs.com/) or [loopback](http://loopback.io/)
 
 
@@ -72,6 +68,11 @@ I know I'm forcing your hand here, but you can use a middleware for authenticati
 #### Obs
 
 If you want to override any method, you just need to add your own custom route BEFORE the middleware.  
+
+#### Issues
+
+If you find any kind of issue, please make this world more beautiful and **report** this [**issue**](https://github.com/luizguilhermesj/generic-rest-api/issues) so I can correct it.  
+And, of course, if you want you can always make a [**pull request**](https://github.com/luizguilhermesj/generic-rest-api/pulls).  
 
 #### Next Steps
 
