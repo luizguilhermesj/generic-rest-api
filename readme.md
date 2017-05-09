@@ -17,12 +17,12 @@ First you add generic-rest-api to your project:
 npm install --save generic-rest-api
 ```
 
-Then you add it as a middleware to your express app, passing the express app instance and the path where your sequelize models are:
+Then you add it as a middleware to your express app, informing the path where your sequelize models are:
 
 ```javascript
 var genericRestApi = require('generic-rest-api');
 ...
-app.use(genericRestApi(app, __dirname+'/models'));
+app.use(genericRestApi(__dirname+'/models'));
 ```
 
 Let's assume you have just one model named `user`. The first example will add your application the following routes:
@@ -34,13 +34,10 @@ POST /user
 PUT /user/:id  
 DELETE /user/:id  
 
-If you want to add a prefix to your API you can declare it in the options:
+If you want to add a prefix to your API you just need to declare it in express use:
 
 ```javascript
-var options = {
-    prefix: "/api/v2"
-};
-app.use(genericRestApi(app, __dirname+'/models', options));
+app.use('/api/v2', genericRestApi(__dirname+'/models'));
 ```
 
 This way your API will be:  
@@ -48,7 +45,7 @@ This way your API will be:
 GET /api/v2/user  
 [...]  
 
-You can also add some middlewares to all generic rest routes:
+You can also add some middlewares to all generic rest routes using an options argument:
 
 ```javascript
 var options = {
@@ -56,7 +53,7 @@ var options = {
         authentication
     ]
 };
-app.use(genericRestApi(app, __dirname+'/models', options));
+app.use(genericRestApi(__dirname+'/models', options));
 ```
 
 #### Authentication

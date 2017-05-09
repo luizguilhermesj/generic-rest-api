@@ -1,13 +1,13 @@
 var fs = require('fs');
+var express = require('express');
+var router = express.Router();
 var routes = require('./express-routes');
 
-module.exports = function(app, modelsPath, options) {
-    if (typeof app == 'undefined') throw Error('You must pass an app object as the first argument');
+module.exports = function(modelsPath, options) {
     if (typeof modelsPath == 'undefined') throw Error('You must pass the models path as the second argument');
 
     var models  = require(modelsPath);
     var defaults = {
-        prefix: null,
         middlewares: []
     };
 
@@ -18,8 +18,8 @@ module.exports = function(app, modelsPath, options) {
     fs.readdirSync(modelsPath).forEach(function (file) {
         if(file.substr(-3) == '.js') {
             var modelName = file.replace(".js","");
-            var route = options.prefix ? '/'+options.prefix.replace(/^\/+|\/+$/g, '')+'/'+modelName : '/' + modelName;
-            app.use(route, preRoutes, function(req, res, next) {
+            var route = '/' + modelName;
+            router.use(route, preRoutes, function(req, res, next) {
                 req.genericRestApi = {
                     modelName: modelName,
                     models: models,
@@ -30,11 +30,7 @@ module.exports = function(app, modelsPath, options) {
         }
     });
 
-
-    return function(req, res, next) {
-        return next();
-    };
-
+    return router;
 };
 
 
