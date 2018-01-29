@@ -1,10 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
+function setQueryOptions(req, res, next) {
+    let options = {
+        where: req.query
+    }
+
+    if (req.query.populate) {
+        options.include = req.query.populate;
+        delete options.where.populate;
+    }
+
+    if (req.query.fields) {
+        options.attributes = req.query.fields.split(',');
+        delete options.where.fields;
+    }
+
+    req.queryOptions = options;
+    next();
+}
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', setQueryOptions, function(req, res, next) {
     req.genericRestApi.model
-    .findAll()
+    .findAll(req.queryOptions)
     .then(function(records) {
         if (records) return res.json(records);
         return next();
@@ -38,7 +57,7 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-router.get('/:id/:relation', function(req, res, next) {
+router.get('/:id/:relation', setQueryOptions, function(req, res, next) {
     var query = {};
     query[req.genericRestApi.modelName+'_'+'id'] = req.params.id;
 
