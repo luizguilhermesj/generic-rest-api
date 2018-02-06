@@ -7,7 +7,7 @@ function setQueryOptions(req, res, next) {
     }
 
     if (req.query.populate) {
-        options.include = req.query.populate;
+        options.include = req.query.populate.split(',');
         delete options.where.populate;
     }
 
