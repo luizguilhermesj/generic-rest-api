@@ -1,6 +1,6 @@
 {
   "name": "generic-rest-api",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Express JS generic rest api based on your sequelize models",
   "main": "index.js",
   "keywords": [
