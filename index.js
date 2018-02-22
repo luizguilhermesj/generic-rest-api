@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 var routes = require('./express-routes');
-var sequelizeOptions = require('./middlewares/sequelize-options');
+var sequelizeOptions = require('./middlewares/sequelize-options').middleware;
 
 module.exports = function(modelsPath, options) {
     if (typeof modelsPath == 'undefined') throw Error('You must pass the models path as the second argument');

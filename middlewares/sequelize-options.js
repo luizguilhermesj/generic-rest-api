@@ -1,20 +1,32 @@
-module.exports = function (req, res, next) {
-    let where = req.query.where ? JSON.parse(req.query.where) : req.query
+const reservedVars = ['populate', 'fields'];
 
-    let options = {
-        where
+const middleware = (req, res, next) => {
+    try {
+        req.queryOptions = {
+            where: req.query.where ? JSON.parse(req.query.where) : removeReservedVars(req.query),
+            include: getFieldAsArray(req.query.populate),
+            attributes: getFieldAsArray(req.query.fields),
+        };
+    } catch(err) {
+        return res.status(500).json({ error: 'Route malformed' });
     }
 
-    if (req.query.populate) {
-        options.include = req.query.populate.split(',');
-        delete options.where.populate;
-    }
-
-    if (req.query.fields) {
-        options.attributes = req.query.fields.split(',');
-        delete options.where.fields;
-    }
-
-    req.queryOptions = options;
     next();
 }
+
+const removeReservedVars = queries =>
+    Object.keys(queries)
+        .filter(obj => reservedVars.indexOf(obj) === -1)
+        .reduce((obj, key) => {
+            obj[key] = queries[key];
+            return obj;
+        }, {});
+
+const getFieldAsArray = field =>
+    field ? field.split(',') : undefined;
+
+module.exports = {
+    middleware,
+    removeReservedVars,
+    getFieldAsArray,
+};
