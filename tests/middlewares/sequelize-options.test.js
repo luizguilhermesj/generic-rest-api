@@ -2,7 +2,6 @@ const helpers = require('../../middlewares/sequelize-options');
 
 describe('Sequelize Options', () => {
     test('should return a object removing reserved vars', () => {
-        console.log(helpers);
         const query = {
             firstName: 'Luiz',
             fields: 'name,age',
