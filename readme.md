@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/luizguilhermesj/generic-rest-api.svg?branch=master)](https://travis-ci.org/luizguilhermesj/generic-rest-api)
+
 # generic-rest-api
 Express JS generic REST API based on your sequelize models
 
@@ -58,28 +60,33 @@ app.use(genericRestApi(__dirname+'/models', options));
 
 #### Aditional Parameters
 In way to perform more specific queries, you can pass some parameters while accessing your API route.
-**Filter results by specif value (works as sql 'where')**
+
+**Filter results by specif value (works as sql 'where [name] = [value]')**
 all parameters passed as get method will be treated as a 'WHERE' rule
 ```
 GET /api/v2/user/?firstName=Luiz
 ```
+
 **Show only specific fields**
 To return only specif fields, you can pass a parameter called 'fields' separeted by comma.
 ```
 GET /api/v2/user/?firstName=Luiz&fields=user_id,age,fullName
 ```
+
 **Making field relations**
 If a foreign key is set to a field, you can pass with a parameter called 'populate' in order to have it retrieve within your API response. If you have more than one relation, you can pass it also separated by comma
 ```
 GET /api/v2/user/?firstName=Luiz&fields=user_id,age,fullName&populate=company,...
 ```
+
 ***Advanced where queries***
 In order to have advanced queries with 'LIKE' on 'WHERE', you can specify an JSON just like sequelize accepts
 ```
 GET /api/v1/user/?where={"name":{"$like":"%25Luiz%25"}}
 ```
+
 Important notes:
-* If you pass 'WHERE' parameter, all others WHERE rules passed by get method will be overwritten.
+* If you pass 'WHERE' parameter, all others other filter rules passed by get method will be overwritten.
 * You need to specify the operator name with a "$" as a prefix.
 * You can find a list of all operators accepted on http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
 
